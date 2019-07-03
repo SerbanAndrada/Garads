@@ -1,0 +1,14 @@
+.center {
+    display:flex;
+    align-content: center;
+    justify-content: center;
+    height: 100vh;
+    
+    mat-card{
+        width: 90%;
+        height: 700px;
+        align-self: center;
+
+    }  
+  }
+  

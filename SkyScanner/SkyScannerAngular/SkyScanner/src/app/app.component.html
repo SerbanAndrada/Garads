@@ -1,0 +1,62 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="layout-container">
+  <div class="header">
+    <mat-toolbar color="primary" class="navbar">
+      <mat-toolbar-row>
+        <span>Sky Scanner </span>
+
+        <a routerLink="/home">
+          <button class="button" mat-button>Home</button>
+        </a>
+
+        <a routerLink="/favorites">
+          <button class="button" mat-button>Favorites</button>
+        </a>
+
+        <a routerLink="/myFlights">
+          <button class="button" mat-button>My flights</button>
+        </a>
+
+        <span class="example-spacer"></span>
+
+        <button mat-button [matMenuTriggerFor]="menu">Account</button>
+        <mat-menu #menu="matMenu">
+          <a routerLink="/account/login">
+            <button mat-menu-item>
+              <mat-icon>account_circle</mat-icon>
+              <span>Login</span>
+            </button>
+          </a>
+
+          <a routerLink="/home">
+            <button mat-menu-item (click)="SignOut()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Sign Out</span>
+            </button>
+          </a>
+
+          <a routerLink="/account/settings">
+            <button mat-menu-item>
+              <mat-icon>settings</mat-icon>
+              <span>Settings</span>
+            </button>
+          </a>
+
+          <a routerLink="/account/signup">
+            <button mat-menu-item>
+              <mat-icon>person_add</mat-icon>
+              <span>Create Account</span>
+            </button>
+          </a>
+        </mat-menu>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <div class="componentBody">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="footer">
+
+  </div>
+</div>

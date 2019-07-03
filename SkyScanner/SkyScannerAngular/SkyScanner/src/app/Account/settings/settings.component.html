@@ -1,0 +1,42 @@
+<div class='center'>
+
+    <mat-card>
+  
+      <mat-card-header class="title">
+        <mat-card-title>
+          <h1>Settings</h1>
+        </mat-card-title>
+  
+      </mat-card-header>
+  
+      <mat-card-content>
+  
+        <form [formGroup]="userSettingsForm">
+  
+          <div class="example-form">
+  
+            <mat-form-field>
+              <input required matInput placeholder="Email" formControlName="UserEmail">
+            </mat-form-field>
+  
+            <mat-form-field>
+              <input required matInput placeholder="Username" formControlName="UserName">
+            </mat-form-field>
+  
+            <mat-form-field>
+              <input required matInput placeholder="Password" formControlName="UserPassword" [type]="!hide ? 'password' : 'text'">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-form-field>
+  
+          </div>
+  
+        </form>
+        
+      </mat-card-content>
+  
+      <mat-card-actions>
+        <button mat-raised-button color="primary" class="button" (click)="onClickSettings()" >Update Account</button>
+      </mat-card-actions>
+  
+    </mat-card>
+  </div>

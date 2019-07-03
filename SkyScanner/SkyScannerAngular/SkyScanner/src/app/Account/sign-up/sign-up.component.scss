@@ -1,0 +1,31 @@
+.center {
+  display:flex;
+  align-content: center;
+  justify-content: center;
+  height: 100vh;
+  
+  mat-card{
+      width: 400px;
+      height: auto;
+      align-self: center;
+  }  
+}
+
+.example-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.button{
+  align-self: center;
+}
+
+.mat-card-actions .mat-button:first-child, .mat-card-actions .mat-raised-button:first-child{
+  margin-right: 50%;
+  margin-left:50%;
+  transform: translate(-50%,-50%);
+}
+
+.title{
+  justify-content: center;
+}

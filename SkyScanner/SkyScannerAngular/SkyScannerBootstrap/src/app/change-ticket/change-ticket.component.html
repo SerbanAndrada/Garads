@@ -1,0 +1,150 @@
+<div class="center">
+        <div class="card text-center">
+          <div class="card-body" *ngIf='flight'>
+            <h6>Flight Informations</h6>
+            <hr />
+      
+            <div class="row">
+              <p class="font-weight-bold text-center col-lg-6">Departure</p>
+              <p class="font-weight-bold text-center col-lg-6">Arrival</p>
+            </div>
+      
+            <div class="row">
+              <p class="text-center col-lg-6">Airport: {{flight.DepartureAirport.AirportName}}, Country:
+                {{flight.DepartureAirport.AirportCountry}}, City: {{flight.DepartureAirport.AirportCity}}</p>
+              <p class="text-center col-lg-6">Airport: {{flight.ArrivalAirport.AirportName}}, Country:
+                {{flight.ArrivalAirport.AirportCountry}}, City: {{flight.ArrivalAirport.AirportCity}}</p>
+            </div>
+      
+            <div class="row">
+              <p class="text-center col-lg-6">{{flight.DepartureDT | date:'short'}}</p>
+              <p class="text-center col-lg-6">{{flight.ArrivalDT | date:'short'}}</p>
+            </div>
+            <p>Duration: {{flight.Duration | ToDurationPipe}}</p>
+            <p>Company: {{flight.Company.CompanyName}}</p>
+            <p>Price: {{flight.Price}} $</p>
+      
+      
+            <div class="row">
+              <div class="col-lg-4 col-md-4"></div>
+              <label for="selectSeat" class="col-form-label col-lg-2 col-md-2">Select seat:</label>
+              <select class="form-control col-lg-2 " id="selectSeat" [(ngModel)]="seatSelected" (ngModelChange)='onSeatSelected()'>
+                <option *ngFor="let seat of availableSeats" [value]="seat.SeatId">{{seat.SeatName}}</option>
+              </select>
+            </div>
+      
+            <hr />
+            <h6>Personal Informations</h6>
+            <hr />
+      
+            <form nonvalidate autocomplete="off" (ngSubmit)="save()" [formGroup]="changeTicketForm">
+      
+              <div class="form-group row">
+                <label class="col-md-2 col-lg-2 col-form-label" for="Name">Name</label>
+                <div class="col-md-10 col-lg-10 ">
+                  <input class="form-control" id="Name" type="text" placeholder="Required*" formControlName="Name" [ngClass]="{'is-invalid': (changeTicketForm.get('Name').touched || 
+                        changeTicketForm.get('Name').dirty) &&
+                        !changeTicketForm.get('Name').valid }" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="changeTicketForm.get('Name').errors?.required">
+                      Please enter your name!
+                    </span>
+                    <span *ngIf="changeTicketForm.get('Name').errors?.minlength">
+                      The name must be longer than 3 characters!
+                    </span>
+                  </span>
+                </div>
+              </div>
+      
+              <div class="form-group row">
+                <label class="col-md-2 col-lg-2 col-form-label" for="CNP">CNP</label>
+                <div class="col-md-10 col-lg-10 ">
+                  <input class="form-control" id="CNP" type="number" placeholder="Required*" formControlName="CNP" [ngClass]="{'is-invalid': (changeTicketForm.get('CNP').touched || 
+                          changeTicketForm.get('CNP').dirty) &&
+                          !changeTicketForm.get('CNP').valid }" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="changeTicketForm.get('CNP').errors?.required">
+                      Can't be empty!
+                    </span>
+                  </span>
+                </div>
+              </div>
+      
+      
+              <div class="form-group row" formGroupName="Address">
+      
+                <label class="col-md-2 col-lg-2 col-form-label" for="Address">Address</label>
+      
+                <div class="col-md-2 col-lg-2 ">
+                  <input class="form-control" id="Address" type="text" placeholder="Country" formControlName="Country"
+                    [ngClass]="{'is-invalid': (changeTicketForm.get('Address').get('Country').touched || 
+                            changeTicketForm.get('Address').get('Country').dirty) &&
+                            !changeTicketForm.get('Address').get('Country').valid }" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="changeTicketForm.get('Address').get('Country').errors?.required">
+                      Required!
+                    </span>
+                    <span *ngIf="changeTicketForm.get('Address').get('Country').errors?.minlength">
+                      Too short!
+                    </span>
+                  </span>
+                </div>
+      
+                <div class="col-md-2 col-lg-2 ">
+                  <input class="form-control" id="Address" type="text" placeholder="City" formControlName="City" [ngClass]="{'is-invalid': (changeTicketForm.get('Address').get('City').touched || 
+                            changeTicketForm.get('Address').get('City').dirty) &&
+                            !changeTicketForm.get('Address').get('City').valid }" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="changeTicketForm.get('Address').get('City').errors?.required">
+                      Required!
+                    </span>
+                    <span *ngIf="changeTicketForm.get('Address').get('City').errors?.minlength">
+                      Too short!
+                    </span>
+                  </span>
+                </div>
+      
+                <div class="col-md-4 col-lg-4 ">
+                  <input class="form-control" id="Address" type="text" placeholder="Street" formControlName="Street"
+                    [ngClass]="{'is-invalid': (changeTicketForm.get('Address').get('Street').touched || 
+                                changeTicketForm.get('Address').get('Street').dirty) &&
+                                !changeTicketForm.get('Address').get('Street').valid }" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="changeTicketForm.get('Address').get('Street').errors?.required">
+                      Required!
+                    </span>
+                    <span *ngIf="changeTicketForm.get('Address').get('Street').errors?.minlength">
+                      Too short!
+                    </span>
+                  </span>
+                </div>
+      
+                <div class="col-md-2 col-lg-2 ">
+                  <input class="form-control" id="Number" type="number" placeholder="Number" formControlName="Number"
+                    [ngClass]="{'is-invalid': (changeTicketForm.get('Address').get('Number').touched || 
+                                  changeTicketForm.get('Address').get('Number').dirty) &&
+                                  !changeTicketForm.get('Address').get('Number').valid }" />
+                  <span class="invalid-feedback">
+                    <span *ngIf="changeTicketForm.get('Address').get('Number').errors?.required">
+                      Required!
+                    </span>
+                    <span *ngIf="changeTicketForm.get('Address').get('Number').errors?.minlength">
+                      Too short!
+                    </span>
+                  </span>
+                </div>
+              </div>
+      
+              <div class="form-group row">
+                <label class="col-md-2 col-lg-2 col-form-label" for="Comments">Comments</label>
+                <div class="col-md-10 col-lg-10 ">
+                  <textarea class="form-control" id="Comments" type="text" placeholder="" formControlName="Comments"></textarea>
+                </div>
+              </div>
+      
+              <button class="btn btn-primary col-md-3 col-lg-3" type="submit" [disabled]="!changeTicketForm.valid">Save</button>
+      
+            </form>
+          </div>
+        </div>
+      </div>

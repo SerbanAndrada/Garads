@@ -1,0 +1,32 @@
+<table class="table table-hover table-light">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Company</th>
+        <th scope="col">Departure location</th>
+        <th scope="col">Departure time</th>
+        <th scope="col">Arrival time</th>
+        <th scope="col">Arrival location</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let flight of flightSchedule'>
+        <td>{{flight.Company.CompanyName}}</td>
+        <td>{{flight.DepartureAirport.AirportName}}</td>
+        <td>{{flight.DepartureDT | date:'short'}}</td>
+        <td>{{flight.ArrivalDT | date:'short'}}</td>
+        <td>{{flight.ArrivalAirport.AirportName}}</td>
+        <td>{{flight.Duration | ToDurationPipe}}</td>
+        <td>{{flight.Price}} $</td>
+        <td><button type="button" class="btn btn-primary" (click)="removeFromFavorite(flight.FlightScheduleId)">Remove</button></td>
+        <td>
+          <a [routerLink]="['/buyTicket/', flight.FlightScheduleId]">
+            <button type="button" class="btn btn-primary">Buy</button>
+          </a>
+        </td>  
+      </tr>
+    </tbody>
+  </table>

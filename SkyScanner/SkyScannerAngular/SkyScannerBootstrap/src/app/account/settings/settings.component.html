@@ -1,0 +1,70 @@
+<div class="center">
+    <div class="card text-center">
+  
+      <div class="card-header">
+        <h3>Settings</h3>
+      </div>
+  
+      <div class="card-body">
+        <form nonvalidate autocomplete="off" (ngSubmit)="save()" [formGroup]="settingsForm" *ngIf="settingsForm">
+  
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-4 col-form-label" for="UserEmailId">E-mail</label>
+            <div class="col-md-8">
+              <input class="form-control" id="UserEmailId" type="email" placeholder="Required*" formControlName="UserEmail"
+                [ngClass]="{'is-invalid': (settingsForm.get('UserEmail').touched || 
+                  settingsForm.get('UserEmail').dirty) &&
+                  !settingsForm.get('UserEmail').valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="settingsForm.get('UserEmail').errors?.required">
+                  Please enter your e-mail!
+                </span>
+                <span *ngIf="settingsForm.get('UserEmail').errors?.email">
+                  Please enter a valid e-mail!
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+              <label class="col-md-4 col-lg-4 col-form-label" for="UserNameId">Name</label>
+              <div class="col-md-8">
+                <input class="form-control" id="UserNameId" type="text" placeholder="Required*" formControlName="UserName"
+                  [ngClass]="{'is-invalid': (settingsForm.get('UserName').touched || 
+                    settingsForm.get('UserName').dirty) &&
+                    !settingsForm.get('UserName').valid }" />
+                <span class="invalid-feedback">
+                  <span *ngIf="settingsForm.get('UserName').errors?.required">
+                    Please enter your name!
+                  </span>
+                  <span *ngIf="settingsForm.get('UserName').errors?.minlength">
+                    The name must be longer than 3 characters!
+                  </span>
+                </span>
+              </div>
+            </div>
+  
+          <div class="form-group row">
+            <label class="col-md-4 col-lg-4  col-form-label" for="UserPasswordId">New password</label>
+            <div class="col-md-8">
+              <input class="form-control" id="UserPasswordId" type="password" placeholder="Required*"
+                formControlName="UserPassword" [ngClass]="{'is-invalid': (settingsForm.get('UserPassword').touched || 
+                    settingsForm.get('UserPassword').dirty) &&
+                    !settingsForm.get('UserPassword').valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="settingsForm.get('UserPassword').errors?.required">
+                  Please enter a password!
+                </span>
+                <span *ngIf="settingsForm.get('UserPassword').errors?.minlength">
+                  The password must be longer than 3 characters!
+                </span>
+              </span>
+            </div>
+          </div>
+  
+          <button class="btn btn-primary col-md-3 col-lg-3" type="submit" [disabled]="!settingsForm.valid">Save</button>
+  
+        </form>
+      </div>
+    </div>
+  </div>

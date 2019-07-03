@@ -1,0 +1,11 @@
+.center {
+    display:flex;
+    align-content: center;
+    justify-content: center;
+    height: 100vh;
+}
+.card{
+    margin-top: 70px;
+    margin-bottom: auto;
+    width: 90%; 
+}    

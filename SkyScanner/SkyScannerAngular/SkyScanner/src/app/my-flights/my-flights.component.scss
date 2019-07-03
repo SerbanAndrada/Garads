@@ -1,0 +1,22 @@
+
+  .center {
+    display:flex;
+    align-content: center;
+    justify-content: center;
+    height: 100vh;
+    
+    mat-card{
+        width: 400px;
+        height: auto;
+        align-self: center;
+        mat-card-action{
+            display: flex;
+            flex-direction: row;
+            button{
+                display: flex;
+                color: primary;
+                background: primary
+            }
+        }
+    }  
+  }

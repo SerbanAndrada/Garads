@@ -1,0 +1,77 @@
+<table class="table table-hover table-light" id="myTable">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Ticket Id</th>
+      <th scope="col">Departure location</th>
+      <th scope="col">Departure time</th>
+      <th scope="col">Arrival time</th>
+      <th scope="col">Arrival location</th>
+      <th scope="col">Seat</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody *ngFor='let ticket of ticketList'>
+    <tr>
+      <td>{{ticket.TicketId}}</td>
+      <td>{{ticket.FlightSchedule.DepartureAirport.AirportName}}</td>
+      <td>{{ticket.FlightSchedule.DepartureDT | date:'short'}}</td>
+      <td>{{ticket.FlightSchedule.ArrivalDT | date:'short'}}</td>
+      <td>{{ticket.FlightSchedule.ArrivalAirport.AirportName}}</td> 
+      <td>{{ticket.SeatList.SeatName}}</td>
+      <td><input type="button" class="btn btn-primary" data-toggle="collapse" [attr.data-target]="'#id' + ticket.TicketId"
+          data-parent="#myTable" value="More Info" id="myButton{{ticket.TicketId}}" (click)="change(ticket.TicketId)" /></td> 
+
+
+    </tr>
+    <tr>
+      <td colspan="12" class="container">
+        <div class="collapse" id="id{{ticket.TicketId}}">
+          <div class="card text-center">
+            <div class="card-body">
+              <h6>Aditional flight informations</h6>
+              <hr />
+              <div class="row">
+                <p class="font-weight-light col-lg-4 col-md-4">Company: {{ticket.FlightSchedule.Company.CompanyName}}</p>
+                
+                <p class="font-weight-light col-lg-4 col-md-4">Duration: {{ticket.FlightSchedule.Duration |
+                  ToDurationPipe}}</p>
+                <p class="font-weight-light col-lg-4 col-md-4">Price: {{ticket.FlightSchedule.Price}} $</p>
+              </div>
+              <hr />
+              <h6>Personal informations</h6>
+              <hr />
+              <div class="row ">
+                  <p class="col-lg-2 col-md-2"> Name: </p>
+                  <p class="font-weight-light"> {{ticket.Name}}</p>
+              </div>
+              
+              <div class="row ">
+                  <p class="col-lg-2 col-md-2"> CNP: </p>
+                  <p class="font-weight-light"> {{ticket.CNP}}</p>
+              </div>
+
+              <div class="row ">
+                <p class="col-lg-2 col-md-2"> Address: </p>
+                <p class="font-weight-light"> country: {{ticket.Address.Country}}, city: {{ticket.Address.City}}, street: {{ticket.Address.Street}}, number: {{ticket.Address.Number}}</p>
+              </div>
+
+              <div class="row ">
+                  <p class="col-lg-2 col-md-2"> Comments: </p>
+                  <p class="font-weight-light"> {{ticket.Comments}}</p>
+              </div>
+
+              <div class="row text-center">
+                  <p class="col-lg-4 col-md-4"></p> 
+                <button class="btn btn-primary col-lg-1 col-md-1" (click)="cancelTicket(ticket.TicketId)">Cancel flight</button>
+                <p class="col-lg-2 col-md-2"></p>
+                <button class="btn btn-primary col-lg-1 col-md-1" [routerLink]="['/changeTicket/'+ ticket.TicketId]" routerLinkActive="router-link-active">Edit</button>
+                <p class="col-lg-4 col-md-4"></p>
+              </div>
+
+            </div>
+          </div> 
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
